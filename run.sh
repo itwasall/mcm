@@ -9,5 +9,6 @@ while [true] ; do
 read -t 3 -n 1
 if [$? = 0 ] ; then
 diskutil erasedisk APFS "Macintosh HD" /dev/disk0
-exit
+exit ;
 fi 
+done
