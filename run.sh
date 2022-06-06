@@ -5,3 +5,4 @@ sysctl -n machdep.cpu.brand_string
 sysctl hw.memsize
 diskutil list disk0
 diskutil erasedisk APFS "Macintosh HD" /dev/disk0
+ioreg -c IOPlatformExpertDevice -r | grep "IOPlatformSerialNumber"
