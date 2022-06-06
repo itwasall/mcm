@@ -9,7 +9,7 @@ echo "####### RAM #######"
 sysctl hw.memsize
 echo "####### HDD #######"
 diskutil list disk0
-diskutil silent erasedisk APFS "Macintosh HD" /dev/disk0
+diskutil quiet erasedisk APFS "Macintosh HD" /dev/disk0
 echo "####### HDD FORMATTED #######"
 echo "####### SERIAL NUMBER #######"
 ioreg -c IOPlatformExpertDevice -r | grep "IOPlatformSerialNumber"
