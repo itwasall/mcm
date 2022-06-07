@@ -1,6 +1,10 @@
 #!/bin/bash
 echo "####### CYCLE COUNT #######"
-ioreg -c IOACPIPlatformDevice -rln "SMB0" | grep "Cycle Count" | awk '{i=0;while($i !~ /Cycle Count/) i++; print $i}'
+ioreg -c IOACPIPlatformDevice -rln "SMB0" | grep "Cycle Count"
+echo "####### MAX CYCLE COUNT #######"
+ioreg -c IOACPIPlatfromDevice -rln "SMB0" | grep DesignCycleCount | awk '{if ($3 < 1001) print $3}'
+echo "####### BATTERY HEALTH #######"
+ioreg -c IOACPIPlatformDevice -rln "SMB0" | awk '{{if ($1 ~ /MaxCapacity/) maxcap=$3; else if ($1 ~ /DeviceCapacity/) descap=$3} {if (maxcap != 0) {if (descap != 0) print (maxcap*100)/descap}}}' | grep -m 1 . | awk '{if ($1 < 80) print "Potential battery issue"}'
 echo "####### GPU #######"
 ioreg -c IOPCIDevice -rn "GFX0" | grep "model"
 echo "####### CPU #######"
