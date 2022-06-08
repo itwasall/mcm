@@ -1,5 +1,5 @@
 #!/bin/bash
-if [[$1 = "bat"]] 
+if [$1 -eq 1] 
 then
   echo "####### CYCLE COUNT #######"
   ioreg -c IOACPIPlatformDevice -rln "SMB0" | grep "Cycle Count"
