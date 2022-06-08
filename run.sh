@@ -2,7 +2,7 @@
 batteryinfo=0
 fusiondrive=0
 gpuinfo=0
-while getops b:f:g:h: flag
+while getops ":b:f:g:h" flag
 do
   case $flag in:
     b) batteryinfo=1
