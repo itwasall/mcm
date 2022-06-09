@@ -1,0 +1,45 @@
+How can we find out that dang battery status without doing a second install? A madman's plight
+
+Current knowledge:
+  Finding battey info:
+    ioreg -c IOACPIPlatformDevice -rln "SMB0"
+    (SMB0 likely means SMart Battery 0. I'm guessing 0 is being used because haha silly computer count from 0. Acquiring the GPU data is similar, GFX0)
+  Parameters of note:
+    CycleCount: <int,cycles>         # Shows the current cycle count of the battery
+    DesignCycleCount9A: <int,cycles> # Usally 1000. Is always the same as the maximum cycle count value given on Apple's website. Unsure what relevance the 
+                                     # hex value of "9A" is.
+    MaxCapacity: <int,mAh>           # Shows the current maximum battery capacity. This is number will decrease as the battery ages and the cycle count 
+                                     # goes up
+    DesignCapacity: <int,mAh>        # Either equal to or higher than MaxCapacity. This value is the battery's capacity as it rolled out the factory.
+You can therefore calculate how much total charge has been lost from the battery with [(MaxCapacity * 100) / DesignCapacity]. Gives answer as a
+percentage.
+Reading between the lines on Apple's battery maintainence page might suggest that going below 80% could trigger a "service recommended" warning.
+Sleuthing on mac-centric forums for threads of people with sub-DesignCycleCount batteries that are giving a "servive recommended" warning 
+supports this theory. 
+### Concrete proof required ###
+
+
+Theory Craftin' & Big Thinkin':
+  Below are some possible solutions to this conundrum. Either by finding battery errors without needing to install MacOS at all, or by digging through ioreg some more and hoping lighting strikes for the third time.
+
+Apple Diagnostics - hold "d" at boot
+Error Code 
+  PPT001 - Battery Not Detected
+  PPT002 - The battery will need to be replaced soon. It is functioning normally but can't hold as much charge as it did when it was new.
+  PPT003 - See PPT002
+  PPT004 - The battery needs a service. The battery is not functioning normally, but symptoms might not be noticeable. Machine will function for now.
+           On Intel-based MacBooks, this can be confirmed by using Apple Diagnostics over the internet by holding "option + D" at boot.
+  PPT005 - The battery is not installed properly.
+  PPT006 - The battery needs a service. The battery is not functioning normally, but symptoms might not be noticeable. Machine will function for now.
+  PPT007 - The battery needs to be replaced. The battery is functioning normally but can hold significantly less charge as it did when it was new.
+           (Most likely a "Service Recommended" warning from going over the "DesignCycleCount9A" value, under the IOACPIPlatformDevice - SMB0 ioreg entry.)
+  
+  
+ioreg
+  Foreword: All the information in this section was gathered from combing Apple's Developer documentation. At the time of writing (at home, not on apple hardware), I am unsure if these values are even grep-able from ioreg's output, and if they are for one version of MacOS will that still hold true for other versions.
+
+IOPMPowerSource
+  Inherits from IOService
+  ErrorCondition -> ioreg key kIOPMPSErrorConditionKey
+    A string describing the error state of the battery
+    (Could potentially be the "Normal" / "Service Recommended" string that System Report spits out)
