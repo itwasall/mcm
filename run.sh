@@ -18,7 +18,7 @@ ioreg -c IOPlatformExpertDevice -r | grep "IOPlatformSerialNumber"
 
 while getops m:b:c flag
 do 
-  case "${flag}" in:
+  case "${flag}" in
     m) /Install\ macOS\ Monterey.app/Contents/Resources/startosinstall --agreetolicense --volume /Volumes/Macintosh\ HD;;
     b) /Install\ macOS\ Big\ Sur.app/Contents/Resources/startosinstall --agreetolicense --volume /Volumes/Macintosh\ HD;;
     c) /Install\ macOS\ Catalina.app/Contents/Resources/startosinstall --aggretolicense --volume /Volumes/Macintosh\ HD;;
