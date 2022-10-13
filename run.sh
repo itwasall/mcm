@@ -13,7 +13,5 @@ echo "####### RAM #######"
 sysctl hw.memsize | awk '{print $2/1024/1024/1024, "GB" }'
 echo "####### HDD #######"
 diskutil list disk0
-diskutil quiet erasedisk APFS "Macintosh HD" /dev/disk0
-echo "####### HDD FORMATTED #######"
 echo "####### SERIAL NUMBER #######"
 ioreg -c IOPlatformExpertDevice -r | grep "IOPlatformSerialNumber"
