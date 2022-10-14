@@ -16,9 +16,9 @@ diskutil list disk0
 echo "####### SERIAL NUMBER #######"
 ioreg -c IOPlatformExpertDevice -r | grep "IOPlatformSerialNumber"
 
-while getopts m:b:c: flag
+option_argument=$1
 do 
-  case "${flag}" in
+  case $option_argument in
     m) /Install\ macOS\ Monterey.app/Contents/Resources/startosinstall --agreetolicense --volume /Volumes/Macintosh\ HD;;
     b) /Install\ macOS\ Big\ Sur.app/Contents/Resources/startosinstall --agreetolicense --volume /Volumes/Macintosh\ HD;;
     c) /Install\ macOS\ Catalina.app/Contents/Resources/startosinstall --aggretolicense --volume /Volumes/Macintosh\ HD;;
