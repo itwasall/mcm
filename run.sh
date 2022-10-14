@@ -19,16 +19,16 @@ option_argument=$1
        echo "####### SERIAL NUMBER #######"
        ioreg -c IOPlatformExpertDevice -r | grep "IOPlatformSerialNumber"
        echo;;
-    ff) diskutil resetfusion;;
-    fa) diskutil erasedisk APFS "Macintosh HD" /dev/disk0
-    fj) diskutil erasedisk JFHS+ "Macintosh HD" /dev/disk0
-    im) /Install\ macOS\ Monterey.app/Contents/Resources/startosinstall --agreetolicense --volume /Volumes/Macintosh\ HD
+    r) diskutil resetfusion;;
+    a) diskutil erasedisk APFS "Macintosh HD" /dev/disk0
+    j) diskutil erasedisk JFHS+ "Macintosh HD" /dev/disk0
+    m) /Install\ macOS\ Monterey.app/Contents/Resources/startosinstall --agreetolicense --volume /Volumes/Macintosh\ HD
        echo;;
-    ib) /Install\ macOS\ Big\ Sur.app/Contents/Resources/startosinstall --agreetolicense --volume /Volumes/Macintosh\ HD
+    b) /Install\ macOS\ Big\ Sur.app/Contents/Resources/startosinstall --agreetolicense --volume /Volumes/Macintosh\ HD
        echo;;
-    ic) /Install\ macOS\ Catalina.app/Contents/Resources/startosinstall --aggretolicense --volume /Volumes/Macintosh\ HD
+    c) /Install\ macOS\ Catalina.app/Contents/Resources/startosinstall --aggretolicense --volume /Volumes/Macintosh\ HD
        echo;;
-    ie) /Install\ macOS\ El\ Captiain.app/Contents/Resources/startosinstall --volume /Volumes/Macintosh\ HD --applicationpath /Install\ macOS\ El\ Captain.app
+    e) /Install\ macOS\ El\ Captiain.app/Contents/Resources/startosinstall --volume /Volumes/Macintosh\ HD --applicationpath /Install\ macOS\ El\ Captain.app
        echo;;
   esac
 done
