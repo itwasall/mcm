@@ -35,6 +35,7 @@ option_argument=$1
        sysctl hw.memsize | awk '{print $2/1024/1024/1024, "GB"}'
        ioreg -rc IOPCIDevice | grep -E "model|VRAM"
        system_profiler SPPowerDataType | grep -E "Count|Condition"
+       echo;;
        
   esac
 done
