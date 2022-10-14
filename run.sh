@@ -30,5 +30,11 @@ option_argument=$1
        echo;;
     e) /Install\ macOS\ El\ Captiain.app/Contents/Resources/startosinstall --volume /Volumes/Macintosh\ HD --applicationpath /Install\ macOS\ El\ Captain.app
        echo;;
+    t)
+       sysctl -n machdep.cpu.brand_string
+       sysctl hw.memsize | awk '{print $2/1024/1024/1024, "GB"}'
+       ioreg -rc IOPCIDevice | grep -E "model|VRAM"
+       system_profiler SPPowerDataType | grep -E "Count|Condition"
+       
   esac
 done
